@@ -1,0 +1,37 @@
+<wm-page data-ng-controller="MainPageController" name="mainpage" pagetitle="Main"> 
+    <wm-header content="header" name="header" height="auto"></wm-header> 
+    <wm-top-nav name="topnav" content="topnav"></wm-top-nav> 
+    <wm-content name="content"> 
+        <wm-left-panel columnwidth="2" name="leftpanel" content="leftnav"></wm-left-panel> 
+        <wm-page-content columnwidth="8" name="mainContent" padding="unset 15px"> 
+            <wm-accordion name="accordion1" closeothers="false"> 
+                <wm-accordionpane name="accordionpane1" title="chart to chart , grid communication Using LiveVariable,pageparam" isdefaultpane="true"> 
+                    <wm-chart type="Pie" title="Pie Chart" iconclass="wi wi-pie-chart" name="chart1" dataset="bind:Variables.Department.dataSet" xaxisdatakey="deptId" yaxisdatakey="budget" on-select="Variables.goToPage_resultpage.invoke()"></wm-chart> 
+                    <wm-label padding="2em 0.5em unset 0.5em" name="label2" caption="on selecting a dept , we will redirect to page which gives quarterly metrics &amp; details of associated employees"></wm-label> 
+                </wm-accordionpane> 
+                <wm-accordionpane name="accordionpane2" title="chart to chart /grid communication using query variable" isdefaultpane="false"> 
+                    <wm-chart type="Donut" title="Donut Chart" iconclass="wi wi-donut-large" name="chart2" xaxisdatakey="deptCode" yaxisdatakey="budget" dataset="bind:Variables.Department.dataSet" groupby="deptCode" aggregation="maximum" aggregationcolumn="budget" borderwidth="5px unset"></wm-chart> 
+                    <wm-label padding="2em 0.5em" name="label4" caption="on selecting a dept,  quarterly metrics &amp; details are populated in below chart &amp; grid" fontweight="bold" fontsize="12"></wm-label> 
+                    <wm-chart type="Bar" title="Bar Chart" iconclass="wi wi-bar-chart" name="chart3" dataset="bind:Variables.deptquery.dataSet" xaxisdatakey="DEPT_CODE" yaxisdatakey="Q1,Q2,Q3,Q4" borderwidth="unset unset 5px unset" showvalues="false" staggerlabels="true" xaxislabeldistance="10"></wm-chart> 
+                    <wm-table title="" dataset="bind:Variables.deptquery.dataSet" navigation="Basic" name="grid1"> 
+                        <wm-table-column binding="DEPT_ID" caption="Dept Id" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="BUDGET" caption="Budget" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="LOCATION" caption="Location" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="NAME" caption="Name" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="Q1" caption="Q1" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="Q2" caption="Q2" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="Q3" caption="Q3" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="Q4" caption="Q4" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="DEPT_CODE" caption="Dept Code" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                        <wm-table-column binding="TENANT_ID" caption="Tenant Id" pcdisplay="true" mobiledisplay="true" readonly="true"></wm-table-column> 
+                    </wm-table> 
+                </wm-accordionpane> 
+                <wm-accordionpane name="accordionpane3" title="Chart bound to FDA service"> 
+                    <wm-chart type="Pie" title="Pie Chart" iconclass="wi wi-pie-chart" name="chart5" height="750px" dataset="bind:Variables.FDAservice.dataSet.results" xaxisdatakey="term" yaxisdatakey="count"></wm-chart> 
+                </wm-accordionpane> 
+            </wm-accordion> 
+        </wm-page-content> 
+        <wm-right-panel columnwidth="2" name="rightpanel" content="rightnav"></wm-right-panel> 
+    </wm-content> 
+    <wm-footer name="footer" content="footer"></wm-footer> 
+</wm-page>
