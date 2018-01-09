@@ -11,6 +11,10 @@
   "type" : "PAGE",
   "params" : [ ]
 }, {
+  "name" : "Main_Copy",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
   "name" : "footer",
   "type" : "FOOTER",
   "params" : [ ]
@@ -34,7 +38,7 @@
   "type" : "RIGHTNAV",
   "params" : [ ]
 }, {
-  "name" : "testr56",
+  "name" : "testr56_renamed",
   "type" : "PAGE",
   "params" : [ ]
 }, {

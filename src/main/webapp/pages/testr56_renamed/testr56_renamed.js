@@ -1,4 +1,4 @@
-Application.$controller("testr56PageController", ["$scope", function ($scope) {
+Application.$controller("testr56_renamedPageController", ["$scope", function ($scope) {
     "use strict";
 
     /* perform any action on the variables within this block(on-page-load) */

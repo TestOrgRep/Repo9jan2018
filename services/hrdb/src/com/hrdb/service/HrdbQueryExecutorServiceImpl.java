@@ -25,7 +25,7 @@ import com.wavemaker.runtime.file.model.Downloadable;
 import com.hrdb.models.query.*;
 
 @Service
-public class HrdbQueryExecutorServiceImpl_V1 implements HrdbQueryExecutorService_V1 {
+public class HrdbQueryExecutorServiceImpl implements HrdbQueryExecutorService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HrdbQueryExecutorServiceImpl.class);
 
@@ -35,12 +35,22 @@ public class HrdbQueryExecutorServiceImpl_V1 implements HrdbQueryExecutorService
 
     @Transactional(readOnly = true, value = "hrdbTransactionManager")
     @Override
-    public Page<Object> executeDeptQuery(Pageable pageable, String code) {
+    public Page<DeptQueryResponse> executeDeptQuery(String code, Pageable pageable) {
         Map params = new HashMap(1);
 
         params.put("code", code);
 
-        return queryExecutor.executeNamedQuery("deptQuery", params, Object.class, pageable);
+        return queryExecutor.executeNamedQuery("deptQuery", params, DeptQueryResponse.class, pageable);
+    }
+
+    @Transactional(readOnly = true, value = "hrdbTransactionManager")
+    @Override
+    public Downloadable exportDeptQuery(ExportType exportType, String code, Pageable pageable) {
+        Map params = new HashMap(1);
+
+        params.put("code", code);
+
+        return queryExecutor.exportNamedQueryData("deptQuery", params, exportType, DeptQueryResponse.class, pageable);
     }
 
 }

@@ -30,7 +30,7 @@
         <constructor-arg ref="hrdbHikariConfig"/>
     </bean>
     <bean class="com.wavemaker.runtime.data.interceptors.WMEntityInterceptor" id="hrdbEntityInterceptor"/>
-    <bean class="com.wavemaker.runtime.data.factory.TypeResolverSessionFactoryBean" id="hrdbSessionFactory">
+    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="hrdbSessionFactory">
         <property name="dataSource" ref="hrdbDataSource"/>
         <property name="packagesToScan" value="com.hrdb"/>
         <property name="entityInterceptor" ref="hrdbEntityInterceptor"/>
@@ -40,11 +40,6 @@
                 hrdb-queries.hbm.xml
                 </value>
             </list>
-        </property>
-        <property name="customTypes">
-            <array value-type="com.wavemaker.runtime.data.CustomType" xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc">
-                <ref bean="dateTimeCustomType"/>
-            </array>
         </property>
         <property name="hibernateProperties">
             <props>
@@ -69,7 +64,6 @@
                 <prop key="hibernate.schema_update.unique_constraint_strategy">
                     skip
                 </prop>
-                <prop key="hibernate.id.new_generator_mappings">true</prop>
             </props>
         </property>
     </bean>
@@ -86,16 +80,6 @@
     <bean class="com.wavemaker.runtime.data.dao.procedure.WMProcedureExecutorImpl" id="hrdbWMProcedureExecutor">
         <property name="template" ref="hrdbTemplate"/>
         <property name="serviceId" value="hrdb"/>
-    </bean>
-    <bean class="com.wavemaker.commons.data.type.WMPersistentLocalDateTime" id="persistentLocalDateTimeType"/>
-    <bean class="com.wavemaker.runtime.data.CustomType" id="dateTimeCustomType">
-        <property name="type" ref="persistentLocalDateTimeType"/>
-        <property name="keys">
-            <list>
-                <value>DateTime</value>
-                <value>org.joda.time.LocalDateTime</value>
-            </list>
-        </property>
     </bean>
     <bean class="com.wavemaker.runtime.resolver.WMPageableHandlerMethodArgumentResolver" id="hrdbPageableHandlerMethodResolver">
         <property name="pageParameterName" value="page"/>
